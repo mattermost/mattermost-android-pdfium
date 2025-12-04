@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.mattermost"
-version = "1.0.0"
+version = "1.1.0"
 
 android {
     namespace = "com.mattermost.pdfium"
@@ -17,7 +17,9 @@ android {
         // Native build setup
         externalNativeBuild {
             cmake {
-                cppFlags +="-std=c++17"
+                cppFlags += "-std=c++17"
+                // 16KB page size alignment for Android 15+ compatibility
+                arguments += "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
             }
         }
 
@@ -25,7 +27,7 @@ android {
             abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
         }
 
-        version = "1.0.0"
+        version = "1.1.0"
     }
 
     buildTypes {
