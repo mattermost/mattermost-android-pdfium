@@ -167,6 +167,8 @@ FPDF_MovePages(FPDF_DOCUMENT document,
 //   1 - Rotated 90 degrees clockwise.
 //   2 - Rotated 180 degrees clockwise.
 //   3 - Rotated 270 degrees clockwise.
+//
+// Or returns -1 on error.
 FPDF_EXPORT int FPDF_CALLCONV FPDFPage_GetRotation(FPDF_PAGE page);
 
 // Set rotation for |page|.
@@ -181,10 +183,14 @@ FPDF_EXPORT void FPDF_CALLCONV FPDFPage_SetRotation(FPDF_PAGE page, int rotate);
 
 // Insert |page_object| into |page|.
 //
-//   page        - handle to a page
-//   page_object - handle to a page object. The |page_object| will be
-//                 automatically freed.
-FPDF_EXPORT void FPDF_CALLCONV
+//   page        - Handle to a page.
+//   page_object - Handle to a page object. FPDFPage_InsertObject() takes
+//                 ownership. Ownership of |page_object| transfers to |page| on
+//                 success. |page_object| is freed on failure. Null
+//                 |page_object| causes a failure.
+//
+// Returns true if successful.
+FPDF_EXPORT FPDF_BOOL FPDF_CALLCONV
 FPDFPage_InsertObject(FPDF_PAGE page, FPDF_PAGEOBJECT page_object);
 
 // Insert |page_object| into |page| at the specified |index|.
