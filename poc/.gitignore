@@ -1,0 +1,6 @@
+# Local-only repro artifacts (not part of the disclosure)
+.venv/
+poc_harness
+poc_harness.dSYM/
+*.pdf
+PR_BODY.md
